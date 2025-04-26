@@ -37,6 +37,10 @@
   margin-left: 10px;
 }
 
+.book-form button:disabled {
+  background-color: grey;
+}
+
 @keyframes spinner {
   from {
     transform: rotate(0deg);
