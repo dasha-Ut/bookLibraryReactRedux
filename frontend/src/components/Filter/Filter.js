@@ -3,12 +3,15 @@ import {
   setTitleFilter,
   selectTitleFilter,
   resetFilters,
+  selectAuthorFilter,
+  setAuthorFilter,
 } from '../../redux/slices/filterSlice';
 import styles from './Filter.module.css';
 
 const Filter = () => {
   const dispatch = useDispatch();
   const titleFilter = useSelector(selectTitleFilter);
+  const authorFilter = useSelector(selectAuthorFilter);
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
@@ -20,9 +23,17 @@ const Filter = () => {
         <div className={`${styles['filter-group']}`}>
           <input
             type="text"
-            placeholder="Filer by title..."
+            placeholder="Filter by title..."
             value={titleFilter}
             onChange={(event) => dispatch(setTitleFilter(event.target.value))}
+          />
+        </div>
+        <div className={`${styles['filter-group']}`}>
+          <input
+            type="text"
+            placeholder="Filter by author..."
+            value={authorFilter}
+            onChange={(event) => dispatch(setAuthorFilter(event.target.value))}
           />
         </div>
         <button type="button" onClick={handleResetFilters}>
