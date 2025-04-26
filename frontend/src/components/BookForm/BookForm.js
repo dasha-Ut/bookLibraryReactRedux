@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './BookForm.module.css';
 import { addBook } from '../../redux/books/actionCreators';
 
 const BookForm = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (title && author) {
-      const book = { title, author };
-      dispath(addBook(book));
+      const book = {
+        title,
+        author,
+        id: uuidv4(),
+      };
+      dispatch(addBook(book));
       setTitle('');
       setAuthor('');
     }
@@ -37,7 +42,7 @@ const BookForm = () => {
           <label htmlFor="title">Author: </label>
           <input
             type="text"
-            id="title"
+            id="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           ></input>
