@@ -70,7 +70,8 @@ const BookList = () => {
             <li key={book.id}>
               <div className={`${styles['book-info']}`}>
                 {++index}.{highlightMatch(book.title, titleFilter)} by{' '}
-                <strong>{highlightMatch(book.author, authorFilter)}</strong>
+                <strong>{highlightMatch(book.author, authorFilter)}</strong> (
+                {book.source})
               </div>
               <div className={`${styles['book-actions']}`}>
                 {book.isFavorite ? (
