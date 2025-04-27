@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import createBookWithId from '../../utils/createBookWithId';
 
 const initialState = [];
 
@@ -21,6 +23,16 @@ const booksSlice = createSlice({
     },
   },
 });
+
+export const thunkFunction = async (dispatch, getState) => {
+  try {
+    const book = await axios.get('http://localhost:4000/random-book');
+    if (book?.data?.title && book?.data?.author)
+      dispatch(addBook(createBookWithId(book.data, 'API')));
+  } catch (error) {
+    console.log('Error fetching random book', error);
+  }
+};
 
 export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions;
 
