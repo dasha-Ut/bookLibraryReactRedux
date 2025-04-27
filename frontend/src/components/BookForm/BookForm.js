@@ -4,6 +4,7 @@ import styles from './BookForm.module.css';
 import booksData from '../../data/books.json';
 import { addBook, fetchBook } from '../../redux/slices/booksSlice';
 import createBookWithId from '../../utils/createBookWithId';
+import { setError } from '../../redux/slices/errorSlice';
 
 const BookForm = () => {
   const [title, setTitle] = useState('');
@@ -24,6 +25,8 @@ const BookForm = () => {
       dispatch(addBook(createBookWithId({ title, author }, 'manual')));
       setTitle('');
       setAuthor('');
+    } else {
+      dispatch(setError('You must fill title and author'));
     }
   };
 
@@ -54,7 +57,8 @@ const BookForm = () => {
             onChange={(e) => setAuthor(e.target.value)}
           ></input>
         </div>
-        <button type="submit" disabled={!author || !title}>
+        <button type="submit">
+          {/*disabled={!author || !title} */}
           Add Book
         </button>
         <button type="button" onClick={handleAddRandomBook}>
