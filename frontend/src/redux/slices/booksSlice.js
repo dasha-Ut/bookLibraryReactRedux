@@ -36,11 +36,19 @@ const booksSlice = createSlice({
       });
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchBook.fulfilled, (state, action) => {
+  // option 1
+  // extraReducers: (builder) => {
+  //   builder.addCase(fetchBook.fulfilled, (state, action) => {
+  //     if (action?.payload?.title && action?.payload?.author)
+  //       state.push(createBookWithId(action.payload, 'API'));
+  //   });
+  // },
+  // option 2
+  extraReducers: {
+    [fetchBook.fulfilled]: (state, action) => {
       if (action?.payload?.title && action?.payload?.author)
         state.push(createBookWithId(action.payload, 'API'));
-    });
+    },
   },
 });
 
